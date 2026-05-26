@@ -706,6 +706,56 @@
         color: var(--muted);
       }
 
+      .print-sheet {
+        border: 1px solid rgba(43, 53, 70, 0.85);
+        border-radius: 8px;
+        padding: 24px;
+        background: rgba(7, 9, 15, 0.24);
+      }
+
+      .print-sheet h2 {
+        margin-bottom: 10px;
+        font-size: 30px;
+      }
+
+      .print-sheet h3 {
+        margin: 20px 0 8px;
+        font-size: 20px;
+      }
+
+      .print-sheet p,
+      .print-sheet li {
+        color: var(--muted);
+      }
+
+      .signature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .signature-card {
+        min-height: 94px;
+        border: 1px solid rgba(43, 53, 70, 0.85);
+        border-radius: 8px;
+        padding: 14px;
+        background: rgba(7, 9, 15, 0.24);
+      }
+
+      .signature-card strong {
+        display: block;
+      }
+
+      .signature-card span {
+        color: var(--muted);
+      }
+
+      .signature-line {
+        margin: 26px 0 8px;
+        border-bottom: 1px solid rgba(169, 177, 194, 0.65);
+      }
+
       .footer {
         margin-top: 28px;
         color: var(--soft);
@@ -752,7 +802,8 @@
         .ai-box,
         .status-strip,
         .criteria,
-        .workbench {
+        .workbench,
+        .signature-grid {
           grid-template-columns: 1fr;
         }
 
@@ -800,20 +851,70 @@
           padding: 0;
         }
 
-        .nav,
+        .topbar,
+        .hero,
+        #conflict,
+        #rules,
+        #execution,
+        #workbench,
+        .screen-only,
+        .footer,
         .print-button {
           display: none;
         }
 
-        .hero-main,
-        .hero-side,
         .section,
-        .card,
-        .node,
-        .rule-row,
-        .step {
+        .print-sheet,
+        .signature-card {
+          border: 0;
           box-shadow: none;
+          background: #fff;
+        }
+
+        .section {
+          margin: 0;
+          padding: 0;
+        }
+
+        #print {
+          display: block;
+        }
+
+        .print-sheet {
+          padding: 24px;
+          color: #111;
+          font-size: 12px;
+          line-height: 1.45;
+        }
+
+        .print-sheet h2 {
+          margin-bottom: 8px;
+          color: #111;
+          font-size: 24px;
+        }
+
+        .print-sheet h3,
+        .signature-card strong {
+          color: #111;
+        }
+
+        .print-sheet p,
+        .print-sheet li,
+        .signature-card span {
+          color: #222;
+        }
+
+        .signature-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+
+        .signature-card {
+          border: 1px solid #999;
           break-inside: avoid;
+        }
+
+        .signature-line {
+          border-bottom-color: #333;
         }
       }
     </style>
@@ -832,7 +933,8 @@
           <a href="#conflict">冲突关系</a>
           <a href="#rules">一页规则纸</a>
           <a href="#execution">执行闭环</a>
-          <a href="#ai">AI 使用</a>
+          <a href="#workbench">协作台账</a>
+          <a href="#print">打印协议</a>
         </nav>
       </header>
 
@@ -1019,72 +1121,14 @@
         </div>
       </section>
 
-      <section class="section" id="scoring">
-        <div class="section-header">
-          <div>
-            <div class="eyebrow">04 // Scoring Anchors</div>
-            <h2>评分点对照</h2>
-          </div>
-          <p class="section-note">
-            这部分把题目要求显性化，避免作品只被看成静态展示。每个评分点都能在页面中找到对应产物。
-          </p>
-        </div>
-
-        <div class="status-strip" aria-label="方案摘要指标">
-          <div class="status-item">
-            <strong>A 方向</strong>
-            <span>规则设计优先</span>
-          </div>
-          <div class="status-item">
-            <strong>4 类冲突</strong>
-            <span>卫生间、厨房、客厅、清洁</span>
-          </div>
-          <div class="status-item">
-            <strong>7 天试运行</strong>
-            <span>先落地，再复盘</span>
-          </div>
-          <div class="status-item">
-            <strong>1 页规则纸</strong>
-            <span>低成本、可执行、可打印</span>
-          </div>
-        </div>
-
-        <div class="criteria" style="margin-top: 16px">
-          <div class="criterion">
-            <strong><span class="badge">1</span>拆解理解</strong>
-            <p>已拆出时间峰值、空间边界、清洁标准、权责执行四类冲突，并用关系图呈现相互制约。</p>
-          </div>
-          <div class="criterion">
-            <strong><span class="badge">2</span>方向选择</strong>
-            <p>选择 A，不先做工具或反馈闭环，因为当前缺的是共同边界和可执行规则。</p>
-          </div>
-          <div class="criterion">
-            <strong><span class="badge">3</span>交付物</strong>
-            <p>交付一页规则纸、早高峰排班、清洁验收、客厅预约和违约处理方式。</p>
-          </div>
-          <div class="criterion">
-            <strong><span class="badge">4</span>取舍假设</strong>
-            <p>明确 C 的客厅归属需要先看合同；若合同认可，约束公共时段；若不认可，重划公共空间。</p>
-          </div>
-          <div class="criterion">
-            <strong><span class="badge">5</span>自我说明</strong>
-            <p>最纠结的是客厅能否半私有化；最不确定的是室友配合度和夜间噪音真实强度。</p>
-          </div>
-          <div class="criterion">
-            <strong><span class="badge">6</span>一致性自证</strong>
-            <p>目标是用最小成本建立共同边界，因此取舍上坚持先规则化高频冲突，再复盘优化。</p>
-          </div>
-        </div>
-      </section>
-
       <section class="section" id="workbench">
         <div class="section-header">
           <div>
-            <div class="eyebrow">05 // Interactive HTML Prototype</div>
-            <h2>规则工作台</h2>
+            <div class="eyebrow">04 // ABC Workbench</div>
+            <h2>三人协作台账</h2>
           </div>
           <p class="section-note">
-            这是本地 HTML 的核心交互区：可以切换冲突场景、勾选规则覆盖情况，并生成可复制的最终交付摘要。
+            这部分只服务 A、B、C 三个人：每天记录事实，周日只改一条最痛规则，避免把生活问题拖成情绪争吵。
           </p>
         </div>
 
@@ -1101,25 +1145,25 @@
             </div>
 
             <div class="control-group">
-              <h3>规则覆盖检查</h3>
+              <h3>今日执行检查</h3>
               <label class="rule-check">
                 <input type="checkbox" class="coverage-check" checked />
-                <span>是否明确使用时段或使用上限</span>
+                <span>卫生间早高峰是否按排班或提前调换</span>
               </label>
               <label class="rule-check">
                 <input type="checkbox" class="coverage-check" checked />
-                <span>是否写清清洁或复位标准</span>
+                <span>厨房是否完成锅碗离池、台面无油污、垃圾不外溢</span>
               </label>
               <label class="rule-check">
                 <input type="checkbox" class="coverage-check" checked />
-                <span>是否设置低成本违约后果</span>
+                <span>客厅是否遵守预约与共享时段</span>
               </label>
               <label class="rule-check">
                 <input type="checkbox" class="coverage-check" checked />
-                <span>是否保留 7 天复盘入口</span>
+                <span>23:30 后是否保持低噪音</span>
               </label>
-              <div class="meter" aria-label="规则覆盖率"><span id="coverageBar"></span></div>
-              <p id="coverageText" class="section-note">规则覆盖率：100%</p>
+              <div class="meter" aria-label="今日执行完成度"><span id="coverageBar"></span></div>
+              <p id="coverageText" class="section-note">今日执行完成度：100%</p>
             </div>
           </div>
 
@@ -1143,15 +1187,46 @@
       <section class="section">
         <div class="section-header">
           <div>
-            <div class="eyebrow">06 // Trial Review</div>
-            <h2>7 天试运行复盘表</h2>
+            <div class="eyebrow">05 // Conflict Protocol</div>
+            <h2>冲突处理流程</h2>
           </div>
           <p class="section-note">
-            复盘只记录事实，不在现场争吵。第 7 天只改一条最痛规则，避免规则越改越复杂。
+            A、B、C 遇到争议时按同一流程处理，不在现场升级矛盾。
           </p>
         </div>
 
-        <div class="review-table" aria-label="7 天试运行复盘表">
+        <div class="timeline">
+          <div class="step">
+            <strong>1. 先复位</strong>
+            <span>能立刻清理、归位、让出空间的，先做复位动作，再讨论原因。</span>
+          </div>
+          <div class="step">
+            <strong>2. 只记事实</strong>
+            <span>用照片或文字记录时间、地点、影响，不写攻击性评价。</span>
+          </div>
+          <div class="step">
+            <strong>3. 对照规则</strong>
+            <span>判断是否违反时段、清洁、预约、静音四类规则。</span>
+          </div>
+          <div class="step">
+            <strong>4. 周日微调</strong>
+            <span>每周只改一条最痛规则，保留简单可执行的生活秩序。</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">06 // Seven-day Ledger</div>
+            <h2>7 天试运行台账</h2>
+          </div>
+          <p class="section-note">
+            台账不用于追责羞辱，只用于判断哪条规则真的需要调整。
+          </p>
+        </div>
+
+        <div class="review-table" aria-label="7 天试运行台账">
           <div class="review-row">
             <strong>日期</strong>
             <strong>记录事项</strong>
@@ -1179,44 +1254,70 @@
         </div>
       </section>
 
-      <section class="section" id="ai">
-        <div class="section-header">
+      <section class="section" id="print">
+        <div class="section-header screen-only">
           <div>
-            <div class="eyebrow">07 // AI Workflow</div>
-            <h2>AI 使用与迭代说明</h2>
+            <div class="eyebrow">07 // Printable Agreement</div>
+            <h2>打印版：ABC 三人合租公共空间协议</h2>
           </div>
           <p class="section-note">
-            AI 用于结构化、发散和交叉校验，不替代最终判断。最终选择 A，是因为它最符合当前场景的止血需求。
+            点击右下角“打印规则纸”只打印下面这份协议，不打印选择方向、面试说明或页面装饰。
           </p>
         </div>
 
-        <details open>
-          <summary>为什么选 GPT-5.5 和 Gemini 3 Pro</summary>
-          <p>GPT-5.5 用于主方案生成，帮助拆解题目、梳理冲突关系、形成一页规则纸；Gemini 3 Pro 用于反向检查，帮助发现风险、遗漏和假设漏洞。两者形成“主方案 + 交叉校验”的工作流。</p>
-        </details>
-        <details>
-          <summary>首条提示词</summary>
-          <p>这是一个面试题：三人合租两室一厅，A 早出晚归，B 昼夜颠倒，C 长期在客厅隔断居住，三人在厨房、卫生间早高峰、客厅杂物和清洁标准上冲突激烈。请从系统思考角度拆解问题，并在 A 规则设计优先、B 数字化工具赋能、C 运维反馈闭环中选择一个可落地方案。</p>
-        </details>
-        <details>
-          <summary>第一次输出不满意之处</summary>
-          <p>首次输出偏完整但不够生活化，部分规则停留在“保持卫生、互相理解”，缺少具体时段、清洁验收、违约成本和 C 的客厅合同边界。</p>
-        </details>
-        <details>
-          <summary>迭代逻辑</summary>
-          <p>先用 AI 发散冲突点，再由我选择 A 方向；随后把规则压缩为一页可执行文档，补充早高峰排班、客厅预约、清洁验收、7 天试运行和一致性自证。</p>
-        </details>
-      </section>
+        <div class="print-sheet">
+          <h2>ABC 三人合租公共空间协议</h2>
+          <p>适用对象：A、B、C 三位室友。适用范围：卫生间、厨房、客厅、公共区清洁、夜间低噪音。目标不是绝对平均，而是让每个人知道边界、优先级和违约后的处理方式。</p>
 
-      <section class="section">
-        <div class="section-header">
-          <div>
-            <div class="eyebrow">08 // Deliverable Summary</div>
-            <h2>可复制交付摘要</h2>
+          <h3>一、卫生间早高峰</h3>
+          <ul>
+            <li>工作日 7:00-8:30 为早高峰保护时段。</li>
+            <li>7:00-7:25 A 优先；7:25-7:50 B 优先；7:50-8:15 C 优先；8:15-8:30 为缓冲时段。</li>
+            <li>需要调换时，前一晚 22:30 前在群里说明；临时占用超过 5 分钟，当天承担一次公共事务。</li>
+          </ul>
+
+          <h3>二、厨房使用与饭后复位</h3>
+          <ul>
+            <li>18:30-21:00 为晚餐高峰，每人连续占用厨房不超过 40 分钟。</li>
+            <li>饭后复位标准：锅碗离池、台面无明显油污、垃圾不外溢、地面无明显食物残渣。</li>
+            <li>22:30 后只做低噪音、低油烟操作，如加热、泡面、简单备餐。</li>
+          </ul>
+
+          <h3>三、客厅边界</h3>
+          <ul>
+            <li>客厅默认是公共空间，不因长期摆放物品而自动变成个人空间。</li>
+            <li>C 可在工作日 10:00-18:00 预约客厅办公，每次最多 4 小时。</li>
+            <li>19:30-22:30 为三人共享时段，不单方面占用客厅办公、会客或堆放杂物。</li>
+            <li>若合同明确认可客厅隔断，则保留 C 的居住边界，但公共通道、共享时段和清洁义务仍适用。</li>
+          </ul>
+
+          <h3>四、清洁轮值与验收</h3>
+          <ul>
+            <li>每周日 20:00 前完成一次公共区轮值清洁。</li>
+            <li>轮值范围：卫生间台面与地面、厨房台面与水槽、客厅公共通道、公共垃圾。</li>
+            <li>争议不当场争吵，先拍照发群，按本协议判断。</li>
+            <li>同一人一周内两次未复位，自动补做一次公共区清洁。</li>
+          </ul>
+
+          <h3>五、夜间低噪音</h3>
+          <ul>
+            <li>23:30 后进入低噪音时段，公共区不外放声音，不进行高噪音清洁或烹饪。</li>
+            <li>夜间视频会议使用耳机；超过 30 分钟需提前在群里说明。</li>
+          </ul>
+
+          <h3>六、试运行与修改</h3>
+          <ul>
+            <li>本协议先试运行 7 天。试运行期间只记录事实，不现场改规则。</li>
+            <li>第 7 天周日进行 15 分钟复盘，只修改一条最影响生活的规则。</li>
+            <li>修改规则需要 A、B、C 至少两人同意，并在群公告中同步。</li>
+          </ul>
+
+          <div class="signature-grid">
+            <div class="signature-card"><strong>A 签名</strong><div class="signature-line"></div><span>日期：</span></div>
+            <div class="signature-card"><strong>B 签名</strong><div class="signature-line"></div><span>日期：</span></div>
+            <div class="signature-card"><strong>C 签名</strong><div class="signature-line"></div><span>日期：</span></div>
           </div>
         </div>
-        <div class="summary-box" id="summaryText">我选择 A：规则设计优先。这个合租场景的核心不是缺工具，而是公共资源边界、使用优先级、清洁标准和违约成本不清。我的交付是一页公共空间规则纸，覆盖卫生间早高峰排班、厨房使用与饭后复位、客厅预约限时、公共区轮值清洁，并通过 7 天试运行复盘机制持续优化。取舍上不先做工具，是因为工具只能承载规则，不能替代共识；不先做反馈闭环，是因为当前冲突已经高频发生，需要先止血。最终目标是把情绪争吵转化为按规则协调。</div>
-        <button class="copy-button" type="button" id="copySummary">复制摘要</button>
       </section>
 
       <p class="footer">一致性自证：目标是用最小成本建立共同边界，所以选择先规则化高频冲突，再用试运行复盘逐步优化。</p>
@@ -1303,20 +1404,6 @@
       coverageChecks.forEach((item) => item.addEventListener("change", updateCoverage));
       updateCoverage();
 
-      const copyButton = document.getElementById("copySummary");
-      const summaryText = document.getElementById("summaryText");
-
-      copyButton.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(summaryText.textContent.trim());
-          copyButton.textContent = "已复制";
-          setTimeout(() => {
-            copyButton.textContent = "复制摘要";
-          }, 1200);
-        } catch {
-          copyButton.textContent = "可手动选择复制";
-        }
-      });
     </script>
   </body>
 </html>
