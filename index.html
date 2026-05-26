@@ -1,0 +1,845 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>三人合租冲突解决方案</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #07090f;
+        --panel: #10141f;
+        --panel-2: #151b27;
+        --line: #2b3546;
+        --text: #f5f7fb;
+        --muted: #a9b1c2;
+        --soft: #737d91;
+        --cyan: #51d5ff;
+        --lime: #b8ff18;
+        --amber: #ffb23f;
+        --pink: #ff4fb8;
+        --green: #62d58f;
+        --red: #ff6b6b;
+        --shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          linear-gradient(rgba(43, 53, 70, 0.22) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(43, 53, 70, 0.18) 1px, transparent 1px),
+          radial-gradient(circle at 18% 8%, rgba(81, 213, 255, 0.1), transparent 28%),
+          radial-gradient(circle at 82% 4%, rgba(255, 178, 63, 0.08), transparent 26%),
+          var(--bg);
+        background-size: 72px 72px, 72px 72px, auto, auto, auto;
+        color: var(--text);
+        font-family:
+          Inter,
+          "PingFang SC",
+          "Microsoft YaHei",
+          Arial,
+          sans-serif;
+        line-height: 1.65;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page {
+        width: min(1180px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 42px 0 56px;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 34px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .mark {
+        display: grid;
+        width: 46px;
+        height: 46px;
+        place-items: center;
+        border: 1px solid rgba(184, 255, 24, 0.55);
+        border-radius: 8px;
+        background: rgba(184, 255, 24, 0.1);
+        color: var(--lime);
+        font-size: 22px;
+        font-weight: 900;
+      }
+
+      .eyebrow {
+        color: var(--amber);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .brand strong {
+        display: block;
+        margin-top: 2px;
+        font-size: 20px;
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: flex-end;
+      }
+
+      .nav a {
+        border: 1px solid rgba(81, 213, 255, 0.3);
+        border-radius: 8px;
+        padding: 8px 12px;
+        color: var(--muted);
+        font-size: 13px;
+        text-decoration: none;
+        transition:
+          border-color 0.2s ease,
+          color 0.2s ease,
+          background 0.2s ease;
+      }
+
+      .nav a:hover,
+      .nav a:focus-visible {
+        background: rgba(81, 213, 255, 0.1);
+        border-color: rgba(81, 213, 255, 0.75);
+        color: var(--text);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+        gap: 22px;
+        align-items: stretch;
+        margin-bottom: 22px;
+      }
+
+      .hero-main,
+      .hero-side,
+      .section,
+      .card {
+        border: 1px solid rgba(81, 213, 255, 0.16);
+        border-radius: 8px;
+        background: rgba(16, 20, 31, 0.88);
+        box-shadow: var(--shadow);
+      }
+
+      .hero-main {
+        padding: 32px;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        max-width: 760px;
+        margin-top: 12px;
+        font-size: clamp(34px, 6vw, 66px);
+        line-height: 1.04;
+        letter-spacing: 0;
+      }
+
+      .lead {
+        max-width: 760px;
+        margin-top: 20px;
+        color: var(--muted);
+        font-size: 18px;
+      }
+
+      .choice {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 28px;
+        border: 1px solid rgba(184, 255, 24, 0.45);
+        border-radius: 8px;
+        padding: 10px 14px;
+        background: rgba(184, 255, 24, 0.09);
+        color: var(--lime);
+        font-weight: 850;
+      }
+
+      .hero-side {
+        display: grid;
+        gap: 1px;
+        overflow: hidden;
+        background: rgba(43, 53, 70, 0.7);
+      }
+
+      .persona {
+        display: grid;
+        grid-template-columns: 42px 1fr;
+        gap: 14px;
+        align-items: center;
+        padding: 20px;
+        background: rgba(21, 27, 39, 0.96);
+      }
+
+      .avatar {
+        display: grid;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border-radius: 8px;
+        color: #071018;
+        font-weight: 900;
+      }
+
+      .a {
+        background: var(--cyan);
+      }
+
+      .b {
+        background: var(--amber);
+      }
+
+      .c {
+        background: var(--pink);
+      }
+
+      .persona strong {
+        display: block;
+        font-size: 18px;
+      }
+
+      .persona span {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .section {
+        margin-top: 22px;
+        padding: 26px;
+      }
+
+      .section-header {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 22px;
+      }
+
+      .section h2 {
+        font-size: 26px;
+      }
+
+      .section-note {
+        max-width: 560px;
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      .grid {
+        display: grid;
+        gap: 16px;
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .card {
+        box-shadow: none;
+        padding: 20px;
+        background: rgba(21, 27, 39, 0.92);
+      }
+
+      .card h3 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+        font-size: 20px;
+      }
+
+      .tag {
+        display: inline-flex;
+        min-width: 28px;
+        height: 28px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 7px;
+        background: rgba(81, 213, 255, 0.12);
+        color: var(--cyan);
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      .card p,
+      .card li {
+        color: var(--muted);
+      }
+
+      .map {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 14px;
+        min-height: 276px;
+      }
+
+      .node {
+        position: relative;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 18px;
+        background: rgba(7, 9, 15, 0.38);
+      }
+
+      .node::after {
+        position: absolute;
+        right: -14px;
+        top: 50%;
+        width: 14px;
+        height: 1px;
+        background: rgba(81, 213, 255, 0.55);
+        content: "";
+      }
+
+      .node:nth-child(3)::after,
+      .node:nth-child(6)::after {
+        display: none;
+      }
+
+      .node strong {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 18px;
+      }
+
+      .node span {
+        color: var(--muted);
+      }
+
+      .node.rule {
+        border-color: rgba(184, 255, 24, 0.42);
+        background: rgba(184, 255, 24, 0.06);
+      }
+
+      .rules {
+        display: grid;
+        gap: 14px;
+      }
+
+      .rule-row {
+        display: grid;
+        grid-template-columns: 170px 1fr;
+        gap: 18px;
+        border: 1px solid rgba(43, 53, 70, 0.78);
+        border-radius: 8px;
+        padding: 16px;
+        background: rgba(7, 9, 15, 0.28);
+      }
+
+      .rule-title {
+        color: var(--text);
+        font-size: 18px;
+        font-weight: 900;
+      }
+
+      .rule-title span {
+        display: block;
+        color: var(--soft);
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 20px;
+      }
+
+      li + li {
+        margin-top: 7px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border: 1px solid rgba(43, 53, 70, 0.85);
+        border-radius: 8px;
+      }
+
+      th,
+      td {
+        border-bottom: 1px solid rgba(43, 53, 70, 0.75);
+        padding: 12px 14px;
+        text-align: left;
+      }
+
+      th {
+        background: rgba(81, 213, 255, 0.1);
+        color: var(--cyan);
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      tr:last-child td {
+        border-bottom: none;
+      }
+
+      td {
+        color: var(--muted);
+      }
+
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .step {
+        border-top: 3px solid var(--cyan);
+        border-radius: 8px;
+        padding: 16px;
+        background: rgba(7, 9, 15, 0.28);
+      }
+
+      .step:nth-child(2) {
+        border-color: var(--amber);
+      }
+
+      .step:nth-child(3) {
+        border-color: var(--pink);
+      }
+
+      .step:nth-child(4) {
+        border-color: var(--lime);
+      }
+
+      .step strong {
+        display: block;
+        margin-bottom: 6px;
+      }
+
+      .step span {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .ai-box {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+
+      .prompt {
+        margin-top: 12px;
+        border: 1px solid rgba(43, 53, 70, 0.9);
+        border-radius: 8px;
+        padding: 14px;
+        background: #07090f;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .footer {
+        margin-top: 28px;
+        color: var(--soft);
+        text-align: center;
+        font-size: 13px;
+      }
+
+      .print-button {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        border: 1px solid rgba(184, 255, 24, 0.5);
+        border-radius: 8px;
+        padding: 12px 16px;
+        background: rgba(184, 255, 24, 0.14);
+        color: var(--lime);
+        font: inherit;
+        font-weight: 850;
+        cursor: pointer;
+        backdrop-filter: blur(10px);
+      }
+
+      .print-button:hover,
+      .print-button:focus-visible {
+        background: rgba(184, 255, 24, 0.22);
+      }
+
+      @media (max-width: 900px) {
+        .topbar,
+        .section-header {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nav {
+          justify-content: flex-start;
+        }
+
+        .hero,
+        .grid-3,
+        .grid-2,
+        .map,
+        .timeline,
+        .ai-box {
+          grid-template-columns: 1fr;
+        }
+
+        .node::after {
+          display: none;
+        }
+
+        .rule-row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .page {
+          width: min(100% - 24px, 1180px);
+          padding-top: 22px;
+        }
+
+        .hero-main,
+        .section {
+          padding: 20px;
+        }
+
+        .lead {
+          font-size: 16px;
+        }
+
+        .print-button {
+          display: none;
+        }
+      }
+
+      @media print {
+        body {
+          background: #fff;
+          color: #111;
+        }
+
+        .page {
+          width: 100%;
+          padding: 0;
+        }
+
+        .nav,
+        .print-button {
+          display: none;
+        }
+
+        .hero-main,
+        .hero-side,
+        .section,
+        .card,
+        .node,
+        .rule-row,
+        .step {
+          box-shadow: none;
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="topbar">
+        <div class="brand">
+          <div class="mark">A</div>
+          <div>
+            <div class="eyebrow">Interview Delivery</div>
+            <strong>三人合租冲突解决方案</strong>
+          </div>
+        </div>
+        <nav class="nav" aria-label="页面导航">
+          <a href="#conflict">冲突关系</a>
+          <a href="#rules">一页规则纸</a>
+          <a href="#execution">执行闭环</a>
+          <a href="#ai">AI 使用</a>
+        </nav>
+      </header>
+
+      <section class="hero" aria-labelledby="title">
+        <div class="hero-main">
+          <div class="eyebrow">Briefing // 规则设计优先</div>
+          <h1 id="title">把合租争吵变成可执行的公共规则</h1>
+          <p class="lead">
+            针对卫生间早高峰、厨房使用、客厅占用和清洁标准四类高频冲突，先建立低成本、可执行、可复盘的共同边界。
+          </p>
+          <div class="choice">选择方向：A 规则设计优先</div>
+        </div>
+
+        <aside class="hero-side" aria-label="三位室友画像">
+          <div class="persona">
+            <div class="avatar a">A</div>
+            <div>
+              <strong>金融实习生</strong>
+              <span>早出晚归，早高峰卫生间和稳定休息是刚需。</span>
+            </div>
+          </div>
+          <div class="persona">
+            <div class="avatar b">B</div>
+            <div>
+              <strong>程序员</strong>
+              <span>昼夜颠倒，夜间活动需要被低打扰规则约束。</span>
+            </div>
+          </div>
+          <div class="persona">
+            <div class="avatar c">C</div>
+            <div>
+              <strong>自由职业者</strong>
+              <span>长期在家，客厅隔断带来公共空间边界争议。</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section" id="conflict">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">01 // Conflict Map</div>
+            <h2>冲突关系图</h2>
+          </div>
+          <p class="section-note">
+            这不是单点矛盾，而是时间、空间、标准和责任四组约束互相叠加。方案先处理最容易反复爆发的公共资源边界。
+          </p>
+        </div>
+        <div class="map">
+          <div class="node">
+            <strong>A：早高峰刚需</strong>
+            <span>早出晚归，卫生间使用窗口固定，迟到成本高。</span>
+          </div>
+          <div class="node">
+            <strong>卫生间排他</strong>
+            <span>同一时间只能一人使用，需要时间表和超时成本。</span>
+          </div>
+          <div class="node rule">
+            <strong>规则 1：高峰排班</strong>
+            <span>工作日 7:00-8:30 固定时段，前一晚可协商调换。</span>
+          </div>
+
+          <div class="node">
+            <strong>C：客厅长期占用</strong>
+            <span>个人工作空间与公共空间属性发生冲突。</span>
+          </div>
+          <div class="node">
+            <strong>空间边界不清</strong>
+            <span>谁能用、用多久、能否会客，没有共同答案。</span>
+          </div>
+          <div class="node rule">
+            <strong>规则 2：预约限时</strong>
+            <span>客厅默认公共，C 可预约办公，但保留共享时段。</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="rules">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">02 // One-page Rules</div>
+            <h2>一页公共空间规则纸</h2>
+          </div>
+          <p class="section-note">
+            规则只保留四块：卫生间、厨房、客厅、清洁。每一条都尽量做到可观察、可执行、可复盘。
+          </p>
+        </div>
+
+        <div class="rules">
+          <div class="rule-row">
+            <div class="rule-title"><span>Bathroom</span>卫生间</div>
+            <div>
+              <table aria-label="早高峰卫生间排班">
+                <thead>
+                  <tr>
+                    <th>时段</th>
+                    <th>优先使用</th>
+                    <th>执行规则</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>7:00-7:25</td>
+                    <td>A</td>
+                    <td>工作日默认保留给最刚性的出门需求。</td>
+                  </tr>
+                  <tr>
+                    <td>7:25-7:50</td>
+                    <td>B</td>
+                    <td>如需调整，前一晚 22:30 前在群里说明。</td>
+                  </tr>
+                  <tr>
+                    <td>7:50-8:15</td>
+                    <td>C</td>
+                    <td>超时超过 5 分钟，当天承担一次公共事务。</td>
+                  </tr>
+                  <tr>
+                    <td>8:15-8:30</td>
+                    <td>缓冲</td>
+                    <td>处理临时情况，避免一次延误拖垮整段早高峰。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="rule-row">
+            <div class="rule-title"><span>Kitchen</span>厨房</div>
+            <ul>
+              <li>晚餐高峰 18:30-21:00，每人连续占用不超过 40 分钟。</li>
+              <li>做饭后完成三项复位：锅碗离池、台面无明显油污、垃圾不外溢。</li>
+              <li>22:30 后只做低噪音、低油烟食物，如加热、泡面或简单备餐。</li>
+            </ul>
+          </div>
+
+          <div class="rule-row">
+            <div class="rule-title"><span>Living Room</span>客厅</div>
+            <ul>
+              <li>客厅默认是公共空间，不因长期放置物品而自动变成个人空间。</li>
+              <li>C 可在工作日 10:00-18:00 预约办公，每次最多 4 小时。</li>
+              <li>19:30-22:30 为三人共享时段，不单方面占用客厅办公或会客。</li>
+            </ul>
+          </div>
+
+          <div class="rule-row">
+            <div class="rule-title"><span>Cleaning</span>清洁</div>
+            <ul>
+              <li>每周日 20:00 前完成一次公共区轮值清洁。</li>
+              <li>争议不当场争吵，先拍照发群，按规则判断。</li>
+              <li>同一人一周内两次未复位，自动补做一次公共区清洁。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="execution">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">03 // Execution</div>
+            <h2>执行闭环</h2>
+          </div>
+          <p class="section-note">
+            这套方案不追求一次到位，而是通过试运行让规则从“写出来”变成“跑起来”。
+          </p>
+        </div>
+
+        <div class="timeline">
+          <div class="step">
+            <strong>第 1 天：确认边界</strong>
+            <span>确认客厅隔断是否被合同认可；若未认可，按公共空间处理。</span>
+          </div>
+          <div class="step">
+            <strong>第 2 天：贴出规则</strong>
+            <span>把一页规则纸发群并贴在公共区域，默认全员可见。</span>
+          </div>
+          <div class="step">
+            <strong>第 3-7 天：试运行</strong>
+            <span>只记录超时、未复位、客厅占用三类事实，不在现场争论。</span>
+          </div>
+          <div class="step">
+            <strong>第 7 天：复盘一条</strong>
+            <span>周日 15 分钟复盘，只调整最痛的一条规则，避免越改越复杂。</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">04 // Trade-off</div>
+            <h2>取舍与风险</h2>
+          </div>
+        </div>
+        <div class="grid grid-2">
+          <div class="card">
+            <h3><span class="tag">舍</span>为什么不先做工具</h3>
+            <p>
+              数字化工具只能承载规则，不能替代共识。如果一开始做共享日历或 Notion，三人仍会争论谁有优先权、什么叫清理干净。
+            </p>
+          </div>
+          <div class="card">
+            <h3><span class="tag">舍</span>为什么不先做反馈闭环</h3>
+            <p>
+              当前冲突已经高频发生，先需要止血。没有基础规则，复盘容易变成情绪吐槽，无法产生可执行改动。
+            </p>
+          </div>
+          <div class="card">
+            <h3><span class="tag">险</span>C 对客厅归属有异议</h3>
+            <p>
+              先确认合同边界。如果合同认可客厅隔断，则只约束公共时段；如果不认可，则按公共空间重新划定使用权。
+            </p>
+          </div>
+          <div class="card">
+            <h3><span class="tag">险</span>有人不执行</h3>
+            <p>
+              不设置高惩罚，采用低成本违约后果：补做清洁、失去下次优先权、下次复盘优先讨论该条。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="ai">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">05 // AI Workflow</div>
+            <h2>AI 使用说明</h2>
+          </div>
+          <p class="section-note">
+            AI 被用作结构化和交叉校验工具，最终选择和取舍由我基于题目约束完成。
+          </p>
+        </div>
+        <div class="ai-box">
+          <div class="card">
+            <h3><span class="tag">主</span>GPT-5.5</h3>
+            <p>用于拆解题目、梳理冲突关系、生成初版规则纸。</p>
+            <div class="prompt">
+              首条提示词：请从系统思考角度拆解三人合租冲突，并在 A/B/C 三个方向中选择一个可落地方案。
+            </div>
+          </div>
+          <div class="card">
+            <h3><span class="tag">校</span>Gemini 3 Pro</h3>
+            <p>用于从风险、遗漏和反对意见角度检查方案，补充边界假设和复盘机制。</p>
+            <div class="prompt">
+              迭代逻辑：先发散冲突点，再压缩成一页规则，最后补充“为什么不选 B/C”和自洽说明。
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <p class="footer">一致性自证：目标是用最小成本建立共同边界，所以选择先规则化高频冲突，再用试运行复盘逐步优化。</p>
+    </main>
+
+    <button class="print-button" type="button" onclick="window.print()">打印规则纸</button>
+  </body>
+</html>
