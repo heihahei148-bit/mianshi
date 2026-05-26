@@ -468,6 +468,244 @@
         font-size: 14px;
       }
 
+      .status-strip {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .status-item,
+      .criterion,
+      .control-panel,
+      .result-panel,
+      .review-row > *,
+      details {
+        border: 1px solid rgba(43, 53, 70, 0.85);
+        border-radius: 8px;
+        background: rgba(7, 9, 15, 0.24);
+      }
+
+      .status-item {
+        padding: 14px;
+      }
+
+      .status-item strong {
+        display: block;
+        color: var(--text);
+        font-size: 18px;
+      }
+
+      .status-item span,
+      .criterion p,
+      .criterion span {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .criteria {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .criterion {
+        padding: 16px;
+      }
+
+      .criterion strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .badge {
+        display: inline-flex;
+        min-width: 32px;
+        height: 28px;
+        align-items: center;
+        justify-content: center;
+        margin-right: 8px;
+        border-radius: 7px;
+        background: rgba(184, 255, 24, 0.1);
+        color: var(--lime);
+        font-size: 13px;
+        font-weight: 900;
+      }
+
+      .workbench {
+        display: grid;
+        grid-template-columns: 330px 1fr;
+        gap: 16px;
+      }
+
+      .control-panel,
+      .result-panel {
+        padding: 18px;
+      }
+
+      .control-group + .control-group {
+        margin-top: 18px;
+      }
+
+      .control-group h3 {
+        margin-bottom: 10px;
+        font-size: 17px;
+      }
+
+      .segmented {
+        display: grid;
+        gap: 8px;
+      }
+
+      .segmented button,
+      .copy-button {
+        border: 1px solid rgba(81, 213, 255, 0.28);
+        border-radius: 8px;
+        padding: 10px 12px;
+        background: rgba(16, 20, 31, 0.82);
+        color: var(--text);
+        font: inherit;
+        text-align: left;
+        cursor: pointer;
+      }
+
+      .segmented button[aria-pressed="true"] {
+        border-color: rgba(184, 255, 24, 0.75);
+        background: rgba(184, 255, 24, 0.1);
+        color: var(--lime);
+      }
+
+      .rule-check {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        color: var(--muted);
+        cursor: pointer;
+      }
+
+      .rule-check + .rule-check {
+        margin-top: 10px;
+      }
+
+      .rule-check input {
+        width: 18px;
+        height: 18px;
+        margin-top: 4px;
+        accent-color: var(--lime);
+      }
+
+      .meter {
+        overflow: hidden;
+        width: 100%;
+        height: 12px;
+        margin: 12px 0 16px;
+        border-radius: 999px;
+        background: rgba(43, 53, 70, 0.85);
+      }
+
+      .meter span {
+        display: block;
+        width: 0;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--cyan), var(--lime));
+        transition: width 0.2s ease;
+      }
+
+      .result-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .result-title strong {
+        font-size: 22px;
+      }
+
+      .result-pill {
+        border: 1px solid rgba(184, 255, 24, 0.45);
+        border-radius: 999px;
+        padding: 4px 10px;
+        color: var(--lime);
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      .result-list {
+        display: grid;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .result-list div {
+        border-left: 3px solid rgba(81, 213, 255, 0.7);
+        padding: 8px 0 8px 12px;
+        color: var(--muted);
+      }
+
+      .review-table {
+        display: grid;
+        gap: 8px;
+      }
+
+      .review-row {
+        display: grid;
+        grid-template-columns: 84px 1fr 1fr 1fr;
+        gap: 8px;
+        align-items: center;
+      }
+
+      .review-row > * {
+        padding: 10px;
+        color: var(--muted);
+      }
+
+      .review-row strong {
+        color: var(--text);
+      }
+
+      .summary-box {
+        min-height: 150px;
+        border: 1px solid rgba(43, 53, 70, 0.85);
+        border-radius: 8px;
+        padding: 16px;
+        background: #07090f;
+        color: var(--muted);
+        white-space: pre-wrap;
+      }
+
+      .copy-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 12px;
+        border-color: rgba(184, 255, 24, 0.45);
+        color: var(--lime);
+        text-align: center;
+        font-weight: 850;
+      }
+
+      details {
+        padding: 14px 16px;
+      }
+
+      details + details {
+        margin-top: 10px;
+      }
+
+      summary {
+        color: var(--text);
+        font-weight: 850;
+        cursor: pointer;
+      }
+
+      details p {
+        margin-top: 10px;
+        color: var(--muted);
+      }
+
       .footer {
         margin-top: 28px;
         color: var(--soft);
@@ -511,7 +749,14 @@
         .grid-2,
         .map,
         .timeline,
-        .ai-box {
+        .ai-box,
+        .status-strip,
+        .criteria,
+        .workbench {
+          grid-template-columns: 1fr;
+        }
+
+        .review-row {
           grid-template-columns: 1fr;
         }
 
@@ -774,37 +1019,162 @@
         </div>
       </section>
 
+      <section class="section" id="scoring">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">04 // Scoring Anchors</div>
+            <h2>评分点对照</h2>
+          </div>
+          <p class="section-note">
+            这部分把题目要求显性化，避免作品只被看成静态展示。每个评分点都能在页面中找到对应产物。
+          </p>
+        </div>
+
+        <div class="status-strip" aria-label="方案摘要指标">
+          <div class="status-item">
+            <strong>A 方向</strong>
+            <span>规则设计优先</span>
+          </div>
+          <div class="status-item">
+            <strong>4 类冲突</strong>
+            <span>卫生间、厨房、客厅、清洁</span>
+          </div>
+          <div class="status-item">
+            <strong>7 天试运行</strong>
+            <span>先落地，再复盘</span>
+          </div>
+          <div class="status-item">
+            <strong>1 页规则纸</strong>
+            <span>低成本、可执行、可打印</span>
+          </div>
+        </div>
+
+        <div class="criteria" style="margin-top: 16px">
+          <div class="criterion">
+            <strong><span class="badge">1</span>拆解理解</strong>
+            <p>已拆出时间峰值、空间边界、清洁标准、权责执行四类冲突，并用关系图呈现相互制约。</p>
+          </div>
+          <div class="criterion">
+            <strong><span class="badge">2</span>方向选择</strong>
+            <p>选择 A，不先做工具或反馈闭环，因为当前缺的是共同边界和可执行规则。</p>
+          </div>
+          <div class="criterion">
+            <strong><span class="badge">3</span>交付物</strong>
+            <p>交付一页规则纸、早高峰排班、清洁验收、客厅预约和违约处理方式。</p>
+          </div>
+          <div class="criterion">
+            <strong><span class="badge">4</span>取舍假设</strong>
+            <p>明确 C 的客厅归属需要先看合同；若合同认可，约束公共时段；若不认可，重划公共空间。</p>
+          </div>
+          <div class="criterion">
+            <strong><span class="badge">5</span>自我说明</strong>
+            <p>最纠结的是客厅能否半私有化；最不确定的是室友配合度和夜间噪音真实强度。</p>
+          </div>
+          <div class="criterion">
+            <strong><span class="badge">6</span>一致性自证</strong>
+            <p>目标是用最小成本建立共同边界，因此取舍上坚持先规则化高频冲突，再复盘优化。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="workbench">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">05 // Interactive HTML Prototype</div>
+            <h2>规则工作台</h2>
+          </div>
+          <p class="section-note">
+            这是本地 HTML 的核心交互区：可以切换冲突场景、勾选规则覆盖情况，并生成可复制的最终交付摘要。
+          </p>
+        </div>
+
+        <div class="workbench">
+          <div class="control-panel">
+            <div class="control-group">
+              <h3>选择当前最痛冲突</h3>
+              <div class="segmented" aria-label="冲突场景选择">
+                <button type="button" class="scenario-btn" data-scenario="bathroom" aria-pressed="true">卫生间早高峰</button>
+                <button type="button" class="scenario-btn" data-scenario="kitchen" aria-pressed="false">厨房与饭后清洁</button>
+                <button type="button" class="scenario-btn" data-scenario="living" aria-pressed="false">客厅隔断占用</button>
+                <button type="button" class="scenario-btn" data-scenario="noise" aria-pressed="false">夜间作息与噪音</button>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <h3>规则覆盖检查</h3>
+              <label class="rule-check">
+                <input type="checkbox" class="coverage-check" checked />
+                <span>是否明确使用时段或使用上限</span>
+              </label>
+              <label class="rule-check">
+                <input type="checkbox" class="coverage-check" checked />
+                <span>是否写清清洁或复位标准</span>
+              </label>
+              <label class="rule-check">
+                <input type="checkbox" class="coverage-check" checked />
+                <span>是否设置低成本违约后果</span>
+              </label>
+              <label class="rule-check">
+                <input type="checkbox" class="coverage-check" checked />
+                <span>是否保留 7 天复盘入口</span>
+              </label>
+              <div class="meter" aria-label="规则覆盖率"><span id="coverageBar"></span></div>
+              <p id="coverageText" class="section-note">规则覆盖率：100%</p>
+            </div>
+          </div>
+
+          <div class="result-panel">
+            <div class="result-title">
+              <strong id="scenarioTitle">卫生间早高峰</strong>
+              <span class="result-pill" id="scenarioOwner">主约束：A 的出门时间</span>
+            </div>
+            <p id="scenarioReason" class="section-note">
+              这是最刚性的时间冲突，迟到成本高，且卫生间同一时间只能一人使用。
+            </p>
+            <div class="result-list" id="scenarioRules">
+              <div>工作日 7:00-8:30 设置固定排班，A 获得最刚性的出门时段。</div>
+              <div>前一晚 22:30 前可在群里申请调换，避免临场争吵。</div>
+              <div>超时超过 5 分钟，当天承担一次公共事务。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="section">
         <div class="section-header">
           <div>
-            <div class="eyebrow">04 // Trade-off</div>
-            <h2>取舍与风险</h2>
+            <div class="eyebrow">06 // Trial Review</div>
+            <h2>7 天试运行复盘表</h2>
           </div>
+          <p class="section-note">
+            复盘只记录事实，不在现场争吵。第 7 天只改一条最痛规则，避免规则越改越复杂。
+          </p>
         </div>
-        <div class="grid grid-2">
-          <div class="card">
-            <h3><span class="tag">舍</span>为什么不先做工具</h3>
-            <p>
-              数字化工具只能承载规则，不能替代共识。如果一开始做共享日历或 Notion，三人仍会争论谁有优先权、什么叫清理干净。
-            </p>
+
+        <div class="review-table" aria-label="7 天试运行复盘表">
+          <div class="review-row">
+            <strong>日期</strong>
+            <strong>记录事项</strong>
+            <strong>判断依据</strong>
+            <strong>下一步</strong>
           </div>
-          <div class="card">
-            <h3><span class="tag">舍</span>为什么不先做反馈闭环</h3>
-            <p>
-              当前冲突已经高频发生，先需要止血。没有基础规则，复盘容易变成情绪吐槽，无法产生可执行改动。
-            </p>
+          <div class="review-row">
+            <span>Day 1-2</span>
+            <span>卫生间是否超时、厨房是否复位</span>
+            <span>排班表、台面状态、垃圾状态</span>
+            <span>只提醒，不改规则</span>
           </div>
-          <div class="card">
-            <h3><span class="tag">险</span>C 对客厅归属有异议</h3>
-            <p>
-              先确认合同边界。如果合同认可客厅隔断，则只约束公共时段；如果不认可，则按公共空间重新划定使用权。
-            </p>
+          <div class="review-row">
+            <span>Day 3-5</span>
+            <span>客厅预约是否挤占共享时段</span>
+            <span>预约记录、实际占用时长</span>
+            <span>累计事实，避免情绪化争辩</span>
           </div>
-          <div class="card">
-            <h3><span class="tag">险</span>有人不执行</h3>
-            <p>
-              不设置高惩罚，采用低成本违约后果：补做清洁、失去下次优先权、下次复盘优先讨论该条。
-            </p>
+          <div class="review-row">
+            <span>Day 6-7</span>
+            <span>找出一条最痛规则</span>
+            <span>发生频率、影响程度、调整成本</span>
+            <span>周日 15 分钟只修改这一条</span>
           </div>
         </div>
       </section>
@@ -812,34 +1182,141 @@
       <section class="section" id="ai">
         <div class="section-header">
           <div>
-            <div class="eyebrow">05 // AI Workflow</div>
-            <h2>AI 使用说明</h2>
+            <div class="eyebrow">07 // AI Workflow</div>
+            <h2>AI 使用与迭代说明</h2>
           </div>
           <p class="section-note">
-            AI 被用作结构化和交叉校验工具，最终选择和取舍由我基于题目约束完成。
+            AI 用于结构化、发散和交叉校验，不替代最终判断。最终选择 A，是因为它最符合当前场景的止血需求。
           </p>
         </div>
-        <div class="ai-box">
-          <div class="card">
-            <h3><span class="tag">主</span>GPT-5.5</h3>
-            <p>用于拆解题目、梳理冲突关系、生成初版规则纸。</p>
-            <div class="prompt">
-              首条提示词：请从系统思考角度拆解三人合租冲突，并在 A/B/C 三个方向中选择一个可落地方案。
-            </div>
-          </div>
-          <div class="card">
-            <h3><span class="tag">校</span>Gemini 3 Pro</h3>
-            <p>用于从风险、遗漏和反对意见角度检查方案，补充边界假设和复盘机制。</p>
-            <div class="prompt">
-              迭代逻辑：先发散冲突点，再压缩成一页规则，最后补充“为什么不选 B/C”和自洽说明。
-            </div>
+
+        <details open>
+          <summary>为什么选 GPT-5.5 和 Gemini 3 Pro</summary>
+          <p>GPT-5.5 用于主方案生成，帮助拆解题目、梳理冲突关系、形成一页规则纸；Gemini 3 Pro 用于反向检查，帮助发现风险、遗漏和假设漏洞。两者形成“主方案 + 交叉校验”的工作流。</p>
+        </details>
+        <details>
+          <summary>首条提示词</summary>
+          <p>这是一个面试题：三人合租两室一厅，A 早出晚归，B 昼夜颠倒，C 长期在客厅隔断居住，三人在厨房、卫生间早高峰、客厅杂物和清洁标准上冲突激烈。请从系统思考角度拆解问题，并在 A 规则设计优先、B 数字化工具赋能、C 运维反馈闭环中选择一个可落地方案。</p>
+        </details>
+        <details>
+          <summary>第一次输出不满意之处</summary>
+          <p>首次输出偏完整但不够生活化，部分规则停留在“保持卫生、互相理解”，缺少具体时段、清洁验收、违约成本和 C 的客厅合同边界。</p>
+        </details>
+        <details>
+          <summary>迭代逻辑</summary>
+          <p>先用 AI 发散冲突点，再由我选择 A 方向；随后把规则压缩为一页可执行文档，补充早高峰排班、客厅预约、清洁验收、7 天试运行和一致性自证。</p>
+        </details>
+      </section>
+
+      <section class="section">
+        <div class="section-header">
+          <div>
+            <div class="eyebrow">08 // Deliverable Summary</div>
+            <h2>可复制交付摘要</h2>
           </div>
         </div>
+        <div class="summary-box" id="summaryText">我选择 A：规则设计优先。这个合租场景的核心不是缺工具，而是公共资源边界、使用优先级、清洁标准和违约成本不清。我的交付是一页公共空间规则纸，覆盖卫生间早高峰排班、厨房使用与饭后复位、客厅预约限时、公共区轮值清洁，并通过 7 天试运行复盘机制持续优化。取舍上不先做工具，是因为工具只能承载规则，不能替代共识；不先做反馈闭环，是因为当前冲突已经高频发生，需要先止血。最终目标是把情绪争吵转化为按规则协调。</div>
+        <button class="copy-button" type="button" id="copySummary">复制摘要</button>
       </section>
 
       <p class="footer">一致性自证：目标是用最小成本建立共同边界，所以选择先规则化高频冲突，再用试运行复盘逐步优化。</p>
     </main>
 
     <button class="print-button" type="button" onclick="window.print()">打印规则纸</button>
+    <script>
+      const scenarios = {
+        bathroom: {
+          title: "卫生间早高峰",
+          owner: "主约束：A 的出门时间",
+          reason: "这是最刚性的时间冲突，迟到成本高，且卫生间同一时间只能一人使用。",
+          rules: [
+            "工作日 7:00-8:30 设置固定排班，A 获得最刚性的出门时段。",
+            "前一晚 22:30 前可在群里申请调换，避免临场争吵。",
+            "超时超过 5 分钟，当天承担一次公共事务。",
+          ],
+        },
+        kitchen: {
+          title: "厨房与饭后清洁",
+          owner: "主约束：清洁标准不一致",
+          reason: "厨房争议通常不是能不能用，而是做完后怎样才算恢复公共状态。",
+          rules: [
+            "晚餐高峰每人连续占用不超过 40 分钟。",
+            "饭后完成锅碗离池、台面无明显油污、垃圾不外溢。",
+            "22:30 后只做低噪音、低油烟食物，减少对休息的影响。",
+          ],
+        },
+        living: {
+          title: "客厅隔断占用",
+          owner: "主约束：公共空间边界",
+          reason: "C 的长期居家需求真实存在，但客厅不能因为长期占用就自动私有化。",
+          rules: [
+            "先确认合同是否认可客厅隔断，决定规则边界。",
+            "若未被合同认可，客厅默认公共，C 只能预约使用。",
+            "19:30-22:30 保留三人共享时段，不单方面会客或办公。",
+          ],
+        },
+        noise: {
+          title: "夜间作息与噪音",
+          owner: "主约束：B 的夜间活动",
+          reason: "B 的作息可以被尊重，但不能把夜间公共空间使用成本转嫁给 A 和 C。",
+          rules: [
+            "23:30 后进入静音时段，公共区不外放声音。",
+            "夜间使用厨房只允许低噪音、低油烟操作。",
+            "如需临时会议或会客，提前在群里说明并控制时长。",
+          ],
+        },
+      };
+
+      const scenarioButtons = document.querySelectorAll(".scenario-btn");
+      const scenarioTitle = document.getElementById("scenarioTitle");
+      const scenarioOwner = document.getElementById("scenarioOwner");
+      const scenarioReason = document.getElementById("scenarioReason");
+      const scenarioRules = document.getElementById("scenarioRules");
+
+      function renderScenario(key) {
+        const scenario = scenarios[key];
+        scenarioTitle.textContent = scenario.title;
+        scenarioOwner.textContent = scenario.owner;
+        scenarioReason.textContent = scenario.reason;
+        scenarioRules.innerHTML = scenario.rules.map((rule) => `<div>${rule}</div>`).join("");
+      }
+
+      scenarioButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          scenarioButtons.forEach((item) => item.setAttribute("aria-pressed", "false"));
+          button.setAttribute("aria-pressed", "true");
+          renderScenario(button.dataset.scenario);
+        });
+      });
+
+      const coverageChecks = document.querySelectorAll(".coverage-check");
+      const coverageBar = document.getElementById("coverageBar");
+      const coverageText = document.getElementById("coverageText");
+
+      function updateCoverage() {
+        const checked = [...coverageChecks].filter((item) => item.checked).length;
+        const percent = Math.round((checked / coverageChecks.length) * 100);
+        coverageBar.style.width = `${percent}%`;
+        coverageText.textContent = `规则覆盖率：${percent}%`;
+      }
+
+      coverageChecks.forEach((item) => item.addEventListener("change", updateCoverage));
+      updateCoverage();
+
+      const copyButton = document.getElementById("copySummary");
+      const summaryText = document.getElementById("summaryText");
+
+      copyButton.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(summaryText.textContent.trim());
+          copyButton.textContent = "已复制";
+          setTimeout(() => {
+            copyButton.textContent = "复制摘要";
+          }, 1200);
+        } catch {
+          copyButton.textContent = "可手动选择复制";
+        }
+      });
+    </script>
   </body>
 </html>
